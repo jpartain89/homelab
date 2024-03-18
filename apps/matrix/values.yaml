@@ -6,8 +6,6 @@ elementweb:
       cert-manager.io/cluster-issuer: letsencrypt-prod
       external-dns.alpha.kubernetes.io/target: "homelab-tunnel.khuedoan.com"
       external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
-      hajimari.io/appName: Chat
-      hajimari.io/icon: chat
     hosts:
       - host: &frontend_host chat.khuedoan.com
         paths:
@@ -44,7 +42,6 @@ dendrite:
       addresses:
         - nats://matrix-nats:4222
   persistence:
-    storageClass: longhorn
     logs:
       capacity: 1Gi
     media:
@@ -63,7 +60,6 @@ dendrite:
         postgresqlPassword: dendrite
     persistence:
       enabled: true
-      storageClass: longhorn
       accessModes:
         - ReadWriteOnce
       size: 5Gi
@@ -75,7 +71,6 @@ dendrite:
       external-dns.alpha.kubernetes.io/target: "homelab-tunnel.khuedoan.com"
       external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
       nginx.ingress.kubernetes.io/proxy-body-size: 32m
-      hajimari.io/enable: 'false'
     hosts:
       - host: *backend_host
         paths:

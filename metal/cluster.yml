@@ -1,12 +1,11 @@
 - name: Create Kubernetes cluster
   hosts: metal
   roles:
+    - prerequisites
     - k3s
     - automatic_upgrade
 
-- name: Create some basic config
+- name: Install Kubernetes addons
   hosts: localhost
-  environment:
-    KUBECONFIG: ./kubeconfig.yaml
   roles:
-    - metallb_config
+    - cilium
